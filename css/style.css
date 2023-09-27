@@ -74,15 +74,49 @@ nav {
 }
 
 .nav_menu_item .nav_menu_link {
-  font-size: 16.5px;
+  /* font-size: 16.5px;
   line-height: 27px;
   color: var(--text-bright);
+  letter-spacing: 0.5px; */
+  font-size: var(--normal-font-size);
+  color: var(--text-bright);
+  font-family: inherit;
+  cursor: pointer;
+  position: relative;
   text-transform: capitalize;
   letter-spacing: 0.5px;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 600ms;
+  transition-property: color;
 }
 
-.nav_menu_link:hover {
+.nav_menu_link.active {
   color: var(--primary-color);
+}
+
+.nav_menu_link:focus,
+.nav_menu_link:hover {
+  color: var(--text-bright);
+}
+
+.nav_menu_link:focus:after,
+.nav_menu_link:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.nav_menu_link:after {
+  content: "";
+  pointer-events: none;
+  bottom: -5px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
 }
 
 .toggle_btn {
@@ -104,7 +138,7 @@ nav {
   width: 100%;
   padding-left: 1.7rem;
   padding-right: 1.7rem;
-  padding-top: 4rem;
+  padding-top: 5rem;
   margin-bottom: 5rem;
 }
 
@@ -117,7 +151,7 @@ nav {
 }
 
 .grid-item-1 {
-  padding-top: 5rem;
+  padding-top: 4rem;
   padding-left: 1.5rem;
 }
 
@@ -134,7 +168,7 @@ nav {
 
 .info-text {
   margin-top: 1.5rem;
-  font-size: 19px;
+  font-size: var(--normal-font-size);
   line-height: 25px;
   color: var(--text-content);
 }
