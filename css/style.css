@@ -247,6 +247,9 @@ nav {
 
 .grid-col-item {
   height: 100%;
+  border: 2px solid var(--btn-hover-color);
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .icon {
@@ -269,7 +272,8 @@ nav {
   display: block;
   font-size: 21px;
   line-height: 33px;
-  color: var(--text-bright);
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 .featured_info p {
@@ -277,7 +281,7 @@ nav {
   width: 100%;
   margin-top: 7px;
   font-weight: 400;
-  color: #334157;
+  color: var(--text-bright);
   line-height: 25px;
   font-size: 15.5px;
 }
