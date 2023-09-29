@@ -67,6 +67,12 @@ nav {
   color: var(--primary-color);
 }
 
+.text-md-content {
+  color: var(--text-bright);
+  font-weight: 500;
+  font-size: var(--normal-font-size);
+}
+
 .nav_menu_list {
   display: flex;
   align-items: center;
@@ -77,10 +83,6 @@ nav {
 }
 
 .nav_menu_item .nav_menu_link {
-  /* font-size: 16.5px;
-  line-height: 27px;
-  color: var(--text-bright);
-  letter-spacing: 0.5px; */
   font-size: var(--normal-font-size);
   color: var(--text-bright);
   font-family: inherit;
@@ -165,7 +167,15 @@ nav {
   color: var(--text-bright);
 }
 
-.main-heading span {
+.alt-heading {
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 50px;
+  padding-top: var(--large-font-size);
+  color: var(--text-bright);
+}
+
+.main-heading > span, .alt-heading > span {
   color: var(--primary-color);
 }
 
@@ -238,6 +248,14 @@ nav {
   object-fit: contain;
 }
 
+.grid-cols-default {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  row-gap: 2rem;
+  padding: 1rem;
+}
+
 .grid-cols-3 {
   width: 100%;
   height: 100%;
@@ -248,12 +266,27 @@ nav {
   padding: 1rem;
 }
 
+.grid-cols-4 {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 1rem;
+  row-gap: 1rem;
+}
+
 .grid-col-item {
   height: fit-content;
   border: 2px solid var(--primary-color);
   background-color: var(--btn-glow-color);
   padding: 20px;
   border-radius: 5px;
+}
+
+.hero-content {
+  height: fit-content;
+  background-color: var(--primary-color);
+  padding: 20px;
 }
 
 .icon {
@@ -289,6 +322,8 @@ nav {
   line-height: 25px;
   font-size: 35px;
 }
+
+
 
 @media screen and (min-width: 1040px) {
   .container {
@@ -364,6 +399,10 @@ nav {
     grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     row-gap: 0.7rem;
   }
+  .grid-cols-4 {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    row-gap: 0.7rem;
+  }
   .featured_info p {
     line-height: 15px;
     font-size: 30px;
@@ -385,8 +424,8 @@ nav {
     justify-content: center;
     padding-top: 0;
   }
-  .main-heading {
-    font-size: 32px;
+  .main-heading, .alt-heading {
+    font-size: 30px;
     text-align: center;
     line-height: 40px;
   }
