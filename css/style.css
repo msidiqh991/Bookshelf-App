@@ -12,7 +12,7 @@
 
   --small-font-size: .8rem;
   --normal-font-size: 1rem;
-  --medium-font-size: 1.2rem;
+  --medium-font-size: 1.15rem;
   --large-font-size: 1.4rem;
 }
 
@@ -283,6 +283,80 @@ nav {
   border-radius: 5px;
 }
 
+.social-media {
+  /* bottom: 0; */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1rem;
+  transform: translateY(-6em);
+  z-index: 1;
+}
+
+.social-media li {
+  background: #f5f5f5;
+  display: inline-flex;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: all .3s ease-in;
+}
+
+.social-media li svg {
+  width: var(--large-font-size);
+  fill: var(--primary-color);
+}
+
+.card-box-item {
+  height: fit-content;
+  background-color: var(--text-bright);
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+  border-top: 4px solid var(--primary-color);
+}
+
+.font-item {
+  display: flex;
+  row-gap: 1.5rem;
+  flex-direction: column;
+}
+
+.font-item:hover {
+  filter: blur(3px);
+}
+
+.font-item:hover .social-media li {
+  filter: none;
+  transform: translateY(-5%);
+  opacity: 1;
+}
+
+.font-item:hover .social-media li:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.font-item:hover .social-media li:nth-child(2) {
+  transition-delay: .1s;
+}
+
+.font-item:hover .social-media li:nth-child(3) {
+  transition-delay: .2s;
+}
+
+.font-item h2 {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: var(--medium-font-size);
+}
+
+.font-item span {
+  color: var(--text-content);
+  font-weight: 500;
+  font-size: var(--normal-font-size);
+}
+
 .hero-content {
   height: fit-content;
   background-color: var(--primary-color);
@@ -322,8 +396,6 @@ nav {
   line-height: 25px;
   font-size: 35px;
 }
-
-
 
 @media screen and (min-width: 1040px) {
   .container {
