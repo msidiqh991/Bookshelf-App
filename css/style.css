@@ -284,7 +284,6 @@ nav {
 }
 
 .social-media {
-  /* bottom: 0; */
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -314,7 +313,7 @@ nav {
   padding: 20px;
   border-radius: 4px;
   text-align: center;
-  border-top: 4px solid var(--primary-color);
+  border-top: 6px solid var(--primary-color);
 }
 
 .font-item {
@@ -323,12 +322,12 @@ nav {
   flex-direction: column;
 }
 
-.font-item:hover {
+.font-item:hover h2, .font-item:hover span {
   filter: blur(3px);
+  transition: .5s;
 }
 
 .font-item:hover .social-media li {
-  filter: none;
   transform: translateY(-5%);
   opacity: 1;
 }
@@ -348,13 +347,16 @@ nav {
 .font-item h2 {
   color: var(--primary-color);
   font-weight: 600;
-  font-size: var(--medium-font-size);
+  font-size: var(--normal-font-size);
+  font-style: italic;
+  transition: .5s;
 }
 
 .font-item span {
   color: var(--text-content);
   font-weight: 500;
   font-size: var(--normal-font-size);
+  transition: .5s;
 }
 
 .hero-content {
