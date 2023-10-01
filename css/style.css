@@ -282,7 +282,7 @@ nav {
   padding: 20px;
   border-radius: 5px;
 }
-
+/* 
 .social-media {
   display: flex;
   justify-content: space-between;
@@ -357,7 +357,7 @@ nav {
   font-weight: 500;
   font-size: var(--normal-font-size);
   transition: .5s;
-}
+} */
 
 .hero-content {
   height: fit-content;
