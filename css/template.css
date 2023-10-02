@@ -37,6 +37,7 @@
 }
 
 .form-content {
+  display: none;
   background-color: var(--text-bright);
   width: 100%;
   max-width: 50%;
@@ -72,6 +73,17 @@ input[type=text], input[type=number], .btn-submit:focus {
   outline: none;
 }
 
+.checkbox-group {
+  padding-top: 10px;
+}
+
+.checkbox-group label {
+  margin-left: 5px;
+  font-size: var(--normal-font-size);
+  font-weight: 500;
+  color: var(--btn-hover-color);
+}
+
 .form-title {
   margin: auto 0;
 }
@@ -89,7 +101,7 @@ input[type=text], input[type=number], .btn-submit:focus {
   font-size: var(--normal-font-size);
   background: none;
   font-weight: 500;
-  margin-top: auto;
+  margin-top: 1rem;
   align-self: flex-end;
   cursor: pointer;
   transition: .3s;
@@ -98,4 +110,24 @@ input[type=text], input[type=number], .btn-submit:focus {
 .btn-submit:hover {
   background: var(--primary-color);
   color: white;
+}
+
+.close {
+  color: var(--text-content);
+  float: right;
+  font-size: var(--large-font-size);
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .form-content {
+    max-width: 100%;
+  }
 }
