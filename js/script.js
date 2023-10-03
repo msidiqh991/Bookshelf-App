@@ -58,6 +58,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function findBook(bookId){
+        for(const bookItem of books) {
+            if(bookItem.id === bookId) {
+                return bookItem;
+            }
+        }
+    }
+
     function postBook(bookObject) {
         const writeTitle = document.getElementById('book-title');
         writeTitle.innerText = bookObject.bookTitle;
