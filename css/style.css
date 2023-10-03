@@ -282,7 +282,7 @@ nav {
   padding: 20px;
   border-radius: 5px;
 }
-/* 
+
 .social-media {
   display: flex;
   justify-content: space-between;
@@ -307,57 +307,60 @@ nav {
   fill: var(--primary-color);
 }
 
-.card-box-item {
+.cardBox-item {
   height: fit-content;
   background-color: var(--text-bright);
-  padding: 20px;
-  border-radius: 4px;
+  border-radius: 5px;
   text-align: center;
-  border-top: 6px solid var(--primary-color);
+  border-left: 8px solid var(--btn-hover-color);
 }
 
-.font-item {
+.book-title {
+  border-bottom: 1px solid var(--primary-color);
+  padding: 15px;
+}
+
+.bookItem {
   display: flex;
   row-gap: 1.5rem;
   flex-direction: column;
 }
 
-.font-item:hover h2, .font-item:hover span {
+.bookItem:hover h2, .bookItem:hover span {
   filter: blur(3px);
   transition: .5s;
 }
 
-.font-item:hover .social-media li {
+.bookItem:hover .social-media li {
   transform: translateY(-5%);
   opacity: 1;
 }
 
-.font-item:hover .social-media li:nth-child(1) {
+.bookItem:hover .social-media li:nth-child(1) {
   transition-delay: 0s;
 }
 
-.font-item:hover .social-media li:nth-child(2) {
+.bookItem:hover .social-media li:nth-child(2) {
   transition-delay: .1s;
 }
 
-.font-item:hover .social-media li:nth-child(3) {
+.bookItem:hover .social-media li:nth-child(3) {
   transition-delay: .2s;
 }
 
-.font-item h2 {
+.bookItem h2 {
   color: var(--primary-color);
   font-weight: 600;
   font-size: var(--normal-font-size);
-  font-style: italic;
   transition: .5s;
 }
 
-.font-item span {
+.bookItem span {
   color: var(--text-content);
   font-weight: 500;
   font-size: var(--normal-font-size);
   transition: .5s;
-} */
+}
 
 .hero-content {
   height: fit-content;

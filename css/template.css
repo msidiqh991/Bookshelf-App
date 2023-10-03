@@ -30,9 +30,8 @@
   color: var(--text-content);
 }
 
-.form-group label {
-  margin-bottom: 4px;
-  font-size: 18px;
+.form-title label {
+  margin: 10px 0 5px 0;
   font-weight: lighter;
 }
 
@@ -71,6 +70,10 @@ input[type=text], input[type=number] {
 
 input[type=text], input[type=number], .btn-submit:focus {
   outline: none;
+}
+
+.list-item {
+  padding: 12px;
 }
 
 .checkbox-group {
