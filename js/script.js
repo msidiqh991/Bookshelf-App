@@ -59,7 +59,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function postBook(bookObject) {
-        
+        const writeTitle = document.getElementById('book-title');
+        writeTitle.innerText = bookObject.bookTitle;
+
+        const writeAuthor = document.getElementById('book-author');
+        writeAuthor.innerText = bookObject.bookAuthor;
+
+        const writeYear = document.getElementById('book-year');
+        writeYear.innerText = bookObject.bookYear;
+
+        const textContainer = document.getElementsByClassName('bookItem');
+        textContainer.append(writeTitle, writeAuthor, writeYear);
+
+        const container = document.getElementsByClassName('cardBox-item');
+        container.append(textContainer);
+        container.setAttribute('id', `book-${bookObject.id}`);
+
+        if(bookObject.isCompleted) {}
+
+
     }
 
 })

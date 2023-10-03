@@ -312,10 +312,9 @@ nav {
   background-color: var(--text-bright);
   border-radius: 5px;
   text-align: center;
-  border-left: 8px solid var(--btn-hover-color);
 }
 
-.book-title {
+#book-title {
   border-bottom: 1px solid var(--primary-color);
   padding: 15px;
 }
