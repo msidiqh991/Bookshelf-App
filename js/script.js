@@ -58,8 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function addBookToCompleted() {
-        
+    function addBookToCompleted(bookId) {
+        const bookTarget = findBook(bookId);
+
+        if(bookTarget == null) return;
+
+        bookTarget.isCompleted = true;
+        document.dispatchEvent(new Event(RENDER_EVENT));
     }
 
     function findBook(bookId){
@@ -71,15 +76,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function removeBookFromCompleted(bookId) {
+        const bookTarget = findBookIndex(bookId);
 
+        if(bookTarget === -1) return;
+
+        books.splice(bookTarget, 1);
+        document.dispatchEvent(new Event(RENDER_EVENT));
     }
 
     function findBookIndex(bookId) {
-
+        for(const index in books) {
+            if(books[index].id === bookId) {
+                return index;
+            }
+        }
+        return -1;
     }
 
     function undoBookFromCompleted() {
-        
+        const bookTarget = findBook(bookId);
+
+        if(bookTarget == null) return;
+
+        bookTarget.isCompleted = false;
+        document.dispatchEvent(new Event(RENDER_EVENT));
     }
 
     function postBook(bookObject) {
