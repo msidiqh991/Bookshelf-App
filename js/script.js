@@ -58,12 +58,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function addBookToCompleted() {
+        
+    }
+
     function findBook(bookId){
         for(const bookItem of books) {
             if(bookItem.id === bookId) {
                 return bookItem;
             }
         }
+    }
+
+    function removeBookFromCompleted(bookId) {
+
+    }
+
+    function findBookIndex(bookId) {
+
+    }
+
+    function undoBookFromCompleted() {
+        
     }
 
     function postBook(bookObject) {
@@ -83,7 +99,9 @@ document.addEventListener('DOMContentLoaded', function() {
         container.append(textContainer);
         container.setAttribute('id', `book-${bookObject.id}`);
 
-        if(bookObject.isCompleted) {}
+        if(bookObject.isCompleted) {
+
+        }
 
 
     }
