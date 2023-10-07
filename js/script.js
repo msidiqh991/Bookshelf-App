@@ -16,9 +16,11 @@ window.onclick = function(event) {
     }
 }
 
-
 const books = [];
 const RENDER_EVENT = 'render-books';
+
+const SAVED_EVENT = 'saved-books';
+const STORAGE_KEY = 'BOOKS'
 
 document.addEventListener('DOMContentLoaded', function() {
     const submitForm = document.getElementById('form');
@@ -55,6 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    document.addEventListener(RENDER_EVENT, function(){
+
+    })
+
     function addBookToCompleted(bookId) {
         const bookTarget = findBook(bookId);
 
@@ -62,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         bookTarget.isCompleted = true;
         document.dispatchEvent(new Event(RENDER_EVENT));
+        saveData();
     }
 
     function findBook(bookId){
@@ -70,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return bookItem;
             }
         }
+        return null;
     }
 
     function removeBookFromCompleted(bookId) {
@@ -79,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         books.splice(bookTarget, 1);
         document.dispatchEvent(new Event(RENDER_EVENT));
+        saveData();
     }
 
     function findBookIndex(bookId) {
@@ -97,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         bookTarget.isCompleted = false;
         document.dispatchEvent(new Event(RENDER_EVENT));
+        saveData();
     }
 
     function postBook(bookObject) {
@@ -145,10 +155,42 @@ document.addEventListener('DOMContentLoaded', function() {
             
             container.append(checkListButton);
         }
-
         return container;
     }
 
+    function isStorageExist(){
+        if(typeof(Storage) === undefined) {
+            alert("Browser tidak mendukung fitur local storage");
+            return false;
+        }
+        return true;
+    }
     
+    function saveData(){
+        if(isStorageExist()){
+            const parsed = JSON.stringify(books);
+            localStorage.setItem(STORAGE_KEY, parsed);
+            document.dispatchEvent(new Event(SAVED_EVENT));
+        }
+    }
+    
+    function loadDataFromStorage(){
+        const serializedData = localStorage.getItem(STORAGE_KEY);
+        let data = JSON.parse(serializedData);
+    
+        if(data !== null) {
+            for(const tempBook of data) {
+                books.push(tempBook);
+            }
+        }
+        document.dispatchEvent(new Event(RENDER_EVENT))
+    }
 
+    if(isStorageExist) {
+        loadDataFromStorage();
+    } 
+
+    document.addEventListener(SAVED_EVENT, function() {
+        console.log(localStorage.getItem(STORAGE_KEY));
+    });
 })
