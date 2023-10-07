@@ -20,9 +20,6 @@ window.onclick = function(event) {
 const books = [];
 const RENDER_EVENT = 'render-books';
 
-const SAVED_EVENT = 'saved-books';
-const STORAGE_KEY = 'BOOKS'
-
 document.addEventListener('DOMContentLoaded', function() {
     const submitForm = document.getElementById('form');
 
@@ -93,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return -1;
     }
 
-    function undoBookFromCompleted() {
+    function undoBookFromCompleted(bookId) {
         const bookTarget = findBook(bookId);
 
         if(bookTarget == null) return;
@@ -120,10 +117,38 @@ document.addEventListener('DOMContentLoaded', function() {
         container.setAttribute('id', `book-${bookObject.id}`);
 
         if(bookObject.isCompleted) {
+            const undoButton = document.getElementsByClassName('undo-button');
+            undoButton.addEventListener('click', function(){
+                undoBookFromCompleted(bookObject.id);
+            });
 
+            const trashButton = document.getElementsByClassName('trash-button');
+            trashButton.addEventListener('click', function(){
+                removeBookFromCompleted(bookObject.id);
+            })
+            
+            container.append(undoButton, trashButton);
+        } else {
+            const checkListButton = document.createElement('button');
+            checkListButton.innerText = "Tambahkan Buku";
+            checkListButton.classList.add('check-button');
+
+            checkListButton.addEventListener('click', function() {
+                addBookToCompleted(bookObject.id);
+            });
+
+            const trashButton = document.getElementsByClassName('trash-button');
+
+            trashButton.addEventListener('click', function(){
+                removeBookFromCompleted(bookObject.id);
+            })
+            
+            container.append(checkListButton);
         }
 
-
+        return container;
     }
+
+    
 
 })
