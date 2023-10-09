@@ -58,7 +58,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.addEventListener(RENDER_EVENT, function(){
+        const uncompletedBookList = document.getElementById('books');
+        uncompletedBookList.innerHTML = '';
+       
+        const completedBookList = document.getElementById('completedBooks');
+        completedBookList.innerHTML = '';
 
+        for (const getBookItem of books) {
+            const bookElement = postBook(getBookItem);
+            if (!getBookItem.isCompleted)
+                uncompletedBookList.append(bookElement);
+            else
+                completedBookList.append(bookElement);
+        }
     })
 
     function addBookToCompleted(bookId) {
@@ -110,20 +122,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function postBook(bookObject) {
-        const writeTitle = document.getElementById('book-title');
+        const writeTitle = document.createElement('h2');
         writeTitle.innerText = bookObject.bookTitle;
+        writeTitle.classList.add('book-title')
 
-        const writeAuthor = document.getElementById('book-author');
+        const writeAuthor = document.createElement('span');
         writeAuthor.innerText = bookObject.bookAuthor;
+        writeAuthor.classList.add('book-author');
 
-        const writeYear = document.getElementById('book-year');
+        const writeYear = document.createElement('span');
         writeYear.innerText = bookObject.bookYear;
+        writeYear.classList.add('book-year');
 
-        const textContainer = document.getElementsByClassName('bookItem');
-        textContainer.append(writeTitle, writeAuthor, writeYear);
+        const getBookStatus = document.createElement('span');
+        getBookStatus.innerText = bookObject.isCompleted.value;
+        getBookStatus.classList.add('book-status');
+
+        const getBookItem = document.getElementsByClassName('bookItem');
+        getBookItem.append(writeTitle, writeAuthor, writeYear, getBookStatus);
 
         const container = document.getElementsByClassName('cardBox-item');
-        container.append(textContainer);
+        container.append(getBookItem);
         container.setAttribute('id', `book-${bookObject.id}`);
 
         if(bookObject.isCompleted) {
