@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         books.push(bookObject);
 
         document.dispatchEvent(new Event(RENDER_EVENT));
-        saveData();
+        // saveData();
     }
 
     function generatedId(){
@@ -123,43 +123,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function postBook(bookObject) {
         const writeTitle = document.createElement('h2');
-        writeTitle.innerText = bookObject.bookTitle;
-        writeTitle.classList.add('book-title')
+        writeTitle.innerText = bookObject.title;
+        writeTitle.setAttribute('id', 'book-title');
 
         const writeAuthor = document.createElement('span');
-        writeAuthor.innerText = bookObject.bookAuthor;
+        writeAuthor.innerText = bookObject.author;
         writeAuthor.classList.add('book-author');
 
         const writeYear = document.createElement('span');
-        writeYear.innerText = bookObject.bookYear;
+        writeYear.innerText = bookObject.year;
         writeYear.classList.add('book-year');
 
         const getBookStatus = document.createElement('span');
-        getBookStatus.innerText = bookObject.isCompleted.value;
+        getBookStatus.innerText = bookObject.isCompleted;
         getBookStatus.classList.add('book-status');
 
-        const getBookItem = document.getElementsByClassName('bookItem');
+        const getBookItem = document.createElement('div');
+        getBookItem.classList.add('bookItem');
         getBookItem.append(writeTitle, writeAuthor, writeYear, getBookStatus);
-
-        const container = document.getElementsByClassName('cardBox-item');
+    
+        const container = document.createElement('div');
+        container.classList.add('cardBox-item');
         container.append(getBookItem);
-        container.setAttribute('id', `book-${bookObject.id}`);
 
         if(bookObject.isCompleted) {
-            const undoButton = document.getElementsByClassName('undo-button');
-            undoButton.addEventListener('click', function(){
-                undoBookFromCompleted(bookObject.id);
-            });
+            // const undoButton = document.getElementsByClassName('undo-button');
+            // undoButton.addEventListener('click', function(){
+            //     undoBookFromCompleted(bookObject.id);
+            // });
 
-            const trashButton = document.getElementsByClassName('trash-button');
-            trashButton.addEventListener('click', function(){
-                removeBookFromCompleted(bookObject.id);
-            })
+            // const trashButton = document.getElementsByClassName('trash-button');
+            // trashButton.addEventListener('click', function(){
+            //     removeBookFromCompleted(bookObject.id);
+            // })
             
             container.append(undoButton, trashButton);
         } else {
             const checkListButton = document.createElement('button');
-            checkListButton.innerText = "Tambahkan Buku";
             checkListButton.classList.add('check-button');
 
             checkListButton.addEventListener('click', function() {
@@ -168,46 +168,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const trashButton = document.getElementsByClassName('trash-button');
 
-            trashButton.addEventListener('click', function(){
-                removeBookFromCompleted(bookObject.id);
-            })
-            
             container.append(checkListButton);
         }
         return container;
     }
 
-    function isStorageExist(){
-        if(typeof(Storage) === undefined) {
-            alert("Browser tidak mendukung fitur local storage");
-            return false;
-        }
-        return true;
-    }
-    
-    function saveData(){
-        if(isStorageExist()){
-            const parsed = JSON.stringify(books);
-            localStorage.setItem(STORAGE_KEY, parsed);
-            document.dispatchEvent(new Event(SAVED_EVENT));
-        }
-    }
-    
-    function loadDataFromStorage(){
-        const serializedData = localStorage.getItem(STORAGE_KEY);
-        let data = JSON.parse(serializedData);
-    
-        if(data !== null) {
-            for(const tempBook of data) {
-                books.push(tempBook);
-            }
-        }
-        document.dispatchEvent(new Event(RENDER_EVENT))
-    }
+    // window.localStorage.removeItem(STORAGE_KEY);
 
-    if(isStorageExist) {
-        loadDataFromStorage();
-    } 
+
+
+    // function isStorageExist(){
+    //     if(typeof(Storage) === undefined) {
+    //         alert("Browser tidak mendukung fitur local storage");
+    //         return false;
+    //     }
+    //     return true;
+    // }
+    
+    // function saveData(){
+    //     if(isStorageExist()){
+    //         const parsed = JSON.stringify(books);
+    //         localStorage.setItem(STORAGE_KEY, parsed);
+    //         document.dispatchEvent(new Event(SAVED_EVENT));
+    //     }
+    // }
+    
+    // function loadDataFromStorage(){
+    //     const serializedData = localStorage.getItem(STORAGE_KEY);
+    //     let data = JSON.parse(serializedData);
+    
+    //     if(data !== null) {
+    //         for(const tempBook of data) {
+    //             books.push(tempBook);
+    //         }
+    //     }
+    //     document.dispatchEvent(new Event(RENDER_EVENT))
+    // }
+
+    // if(isStorageExist) {
+    //     loadDataFromStorage();
+    // } 
 
     document.addEventListener(SAVED_EVENT, function() {
         console.log(localStorage.getItem(STORAGE_KEY));

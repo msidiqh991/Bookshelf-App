@@ -74,6 +74,9 @@ input[type=text], input[type=number], .btn-submit:focus {
 
 .list-item {
   padding: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .checkbox-group {
