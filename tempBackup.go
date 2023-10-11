@@ -63,7 +63,6 @@
 
 
 // Under the Unfinished Books
-
             <div class="cardBox-item">
               <div class="bookItem">
                 <h2 id="book-title">Object Oriented Programming</h2>
@@ -77,5 +76,3 @@
                   Status :  <span id="book-status"></span>
               </span>
               </div>
-
-              // Just Want Updated

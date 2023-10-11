@@ -147,28 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
         container.append(getBookItem);
 
         if(bookObject.isCompleted) {
-            // const undoButton = document.getElementsByClassName('undo-button');
-            // undoButton.addEventListener('click', function(){
-            //     undoBookFromCompleted(bookObject.id);
-            // });
-
-            // const trashButton = document.getElementsByClassName('trash-button');
-            // trashButton.addEventListener('click', function(){
-            //     removeBookFromCompleted(bookObject.id);
-            // })
             
-            container.append(undoButton, trashButton);
         } else {
-            const checkListButton = document.createElement('button');
-            checkListButton.classList.add('check-button');
-
-            checkListButton.addEventListener('click', function() {
-                addBookToCompleted(bookObject.id);
-            });
-
-            const trashButton = document.getElementsByClassName('trash-button');
-
-            container.append(checkListButton);
+            
         }
         return container;
     }
