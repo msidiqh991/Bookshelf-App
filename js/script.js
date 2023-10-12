@@ -1,20 +1,4 @@
-const modalButton = document.getElementById('modalButton');
-const getModal = document.getElementById('bookModal');
-const closeButton = document.getElementsByClassName('close')[0];
-
-modalButton.onclick = function(){
-    getModal.style.display = "block";
-}
-
-closeButton.onclick = function() {
-    getModal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == getModal) {
-        getModal.style.display = "none";
-    }
-}
+import { editSVG, deleteSVG, undoSVG, checkSVG } from "./data.js";
 
 const books = [];
 const RENDER_EVENT = 'render-books';
@@ -149,7 +133,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if(bookObject.isCompleted) {
             
         } else {
-            
+            const checkButton = document.createElement('button');
+            checkButton.classList.add('checkListBtn');
+            checkButton.innerHTML = checkSVG;
+
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('removeBtn');
+            removeButton.innerHTML = deleteSVG;
+
+            const setListButton = document.createElement('li');
+            const setUnorderedList = document.createElement('ul');
+            setUnorderedList.classList.add('social-media');
+
+            setListButton.append(checkButton, removeButton);
+            setUnorderedList.append(setListButton);
+            container.append(setUnorderedList);
         }
         return container;
     }
@@ -194,3 +192,22 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(localStorage.getItem(STORAGE_KEY));
     });
 })
+
+
+const modalButton = document.getElementById('modalButton');
+const getModal = document.getElementById('bookModal');
+const closeButton = document.getElementsByClassName('close')[0];
+
+modalButton.onclick = function(){
+    getModal.style.display = "block";
+}
+
+closeButton.onclick = function() {
+    getModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == getModal) {
+        getModal.style.display = "none";
+    }
+}

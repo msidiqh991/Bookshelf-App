@@ -323,6 +323,7 @@ nav {
   display: flex;
   row-gap: 1.5rem;
   flex-direction: column;
+  padding-bottom: var(--medium-font-size);
 }
 
 .bookItem:hover h2, .bookItem:hover span {
