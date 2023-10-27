@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         bookTarget.isCompleted = true;
         document.dispatchEvent(new Event(RENDER_EVENT));
-        saveData();
+        // saveData();
     }
 
     function findBook(bookId){
@@ -148,16 +148,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(bookObject.isCompleted) {
 
+            const undoButton = document.createElement('button');
+            undoButton.classList.add('undoBtn');
+            undoButton.innerHTML = undoSVG;
+
+            undoButton.addEventListener('click', function() {
+                undoBookFromCompleted(bookObject.id);
+            })
             
-            
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('removeBtn');
+            removeButton.innerHTML = deleteSVG;
+
+            removeButton.addEventListener('click', function() {
+                removeBookFromCompleted(bookObject.id);
+            })
+
+            const setListButton = document.createElement('li');
+            const setUnorderedList = document.createElement('ul');
+            setUnorderedList.classList.add('social-media');
+
+            setListButton.append(undoButton, removeButton);
+            setUnorderedList.append(setListButton);
+            getBookItem.append(setUnorderedList)
+            container.append(getBookItem);
         } else {
             const checkButton = document.createElement('button');
             checkButton.classList.add('checkListBtn');
             checkButton.innerHTML = checkSVG;
 
+            checkButton.addEventListener('click', function () {
+                addBookToCompleted(bookObject.id);
+            });
+
             const removeButton = document.createElement('button');
             removeButton.classList.add('removeBtn');
             removeButton.innerHTML = deleteSVG;
+
+            removeButton.addEventListener('click', function() {
+                removeBookFromCompleted(bookObject.id);
+            })
 
             const setListButton = document.createElement('li');
             const setUnorderedList = document.createElement('ul');
