@@ -35,12 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const bookAuthor = document.getElementById('author').value;
         const bookYear = document.getElementById('year').value;
 
+        document.getElementById('title').value = '';
+        document.getElementById('author').value = '';
+        document.getElementById('year').value = '';
+
         const generatedID = generatedId();
         const bookObject = generatedBookObject(generatedID, bookTitle, bookAuthor, bookYear, false);
         books.push(bookObject);
 
         document.dispatchEvent(new Event(RENDER_EVENT));
-        // saveData();
+        saveData();
     }
 
     function generatedId(){
@@ -80,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         bookTarget.isCompleted = true;
         document.dispatchEvent(new Event(RENDER_EVENT));
-        // saveData();
+        saveData();
     }
 
     function findBook(bookId){
@@ -145,9 +149,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.createElement('div');
         container.classList.add('cardBox-item');
         container.append(getBookItem);
+        container.setAttribute('id', `book-${bookObject.id}`);
 
         if(bookObject.isCompleted) {
-
             const undoButton = document.createElement('button');
             undoButton.classList.add('undoBtn');
             undoButton.innerHTML = undoSVG;
@@ -203,39 +207,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // window.localStorage.removeItem(STORAGE_KEY);
 
-
-
-    // function isStorageExist(){
-    //     if(typeof(Storage) === undefined) {
-    //         alert("Browser tidak mendukung fitur local storage");
-    //         return false;
-    //     }
-    //     return true;
-    // }
+    function isStorageExist(){
+        if(typeof(Storage) === undefined) {
+            alert("Browser tidak mendukung fitur local storage");
+            return false;
+        }
+        return true;
+    }
     
-    // function saveData(){
-    //     if(isStorageExist()){
-    //         const parsed = JSON.stringify(books);
-    //         localStorage.setItem(STORAGE_KEY, parsed);
-    //         document.dispatchEvent(new Event(SAVED_EVENT));
-    //     }
-    // }
+    function saveData(){
+        if(isStorageExist()){
+            const parsed = JSON.stringify(books);
+            localStorage.setItem(STORAGE_KEY, parsed);
+            document.dispatchEvent(new Event(SAVED_EVENT));
+        }
+    }
     
-    // function loadDataFromStorage(){
-    //     const serializedData = localStorage.getItem(STORAGE_KEY);
-    //     let data = JSON.parse(serializedData);
+    function loadDataFromStorage(){
+        const serializedData = localStorage.getItem(STORAGE_KEY);
+        let data = JSON.parse(serializedData);
     
-    //     if(data !== null) {
-    //         for(const tempBook of data) {
-    //             books.push(tempBook);
-    //         }
-    //     }
-    //     document.dispatchEvent(new Event(RENDER_EVENT))
-    // }
+        if(data !== null) {
+            for(const tempBook of data) {
+                books.push(tempBook);
+            }
+        }
+        document.dispatchEvent(new Event(RENDER_EVENT))
+    }
 
-    // if(isStorageExist) {
-    //     loadDataFromStorage();
-    // } 
+    if(isStorageExist) {
+        loadDataFromStorage();
+    } 
 
     document.addEventListener(SAVED_EVENT, function() {
         console.log(localStorage.getItem(STORAGE_KEY));
