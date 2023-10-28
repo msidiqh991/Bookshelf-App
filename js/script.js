@@ -1,21 +1,3 @@
-const modalButton = document.getElementById('modalButton');
-const getModal = document.getElementById('bookModal');
-const closeButton = document.getElementsByClassName('close')[0];
-
-modalButton.onclick = function(){
-    getModal.style.display = "block";
-}
-
-closeButton.onclick = function() {
-    getModal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == getModal) {
-        getModal.style.display = "none";
-    }
-}
-
 const books = [];
 const RENDER_EVENT = 'render-books';
 
@@ -43,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const bookObject = generatedBookObject(generatedID, bookTitle, bookAuthor, bookYear, false);
         books.push(bookObject);
 
+        updateBookCount();
         document.dispatchEvent(new Event(RENDER_EVENT));
         saveData();
     }
@@ -77,12 +60,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })
 
+    function updateBookCount() {
+        const uncompletedBookCount = books.filter(book => !book.isCompleted).length;
+        localStorage.setItem('uncompletedBookCount', uncompletedBookCount);
+    
+        const completedBookCount = books.filter(book => book.isCompleted).length;
+        localStorage.setItem('completedBookCount', completedBookCount);
+    
+        const unfinishedBooks = document.getElementById('unfinished-reading');
+        const finishedBooks = document.getElementById('finished-reading');
+    
+        unfinishedBooks.innerText = uncompletedBookCount;
+        finishedBooks.innerText = completedBookCount;
+    }
+
     function addBookToCompleted(bookId) {
         const bookTarget = findBook(bookId);
 
         if(bookTarget == null) return;
 
         bookTarget.isCompleted = true;
+        updateBookCount()
         document.dispatchEvent(new Event(RENDER_EVENT));
         saveData();
     }
@@ -102,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(bookTarget === -1) return;
 
         books.splice(bookTarget, 1);
+        updateBookCount()
         document.dispatchEvent(new Event(RENDER_EVENT));
         saveData();
     }
@@ -121,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(bookTarget == null) return;
 
         bookTarget.isCompleted = false;
+        updateBookCount()
         document.dispatchEvent(new Event(RENDER_EVENT));
         saveData();
     }
@@ -205,8 +205,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return container;
     }
 
-    // window.localStorage.removeItem(STORAGE_KEY);
-
     function isStorageExist(){
         if(typeof(Storage) === undefined) {
             alert("Browser tidak mendukung fitur local storage");
@@ -239,11 +237,40 @@ document.addEventListener('DOMContentLoaded', function() {
         loadDataFromStorage();
     } 
 
+    if(!updateBookCount) {
+        const unfinishTaskLength = document.getElementById('unfinished-reading');
+        unfinishTaskLength.innerText = !books.isCompleted.length;
+
+        const finishedTaskLength = document.getElementById('finished-reading');
+        finishedTaskLength.innerText = todos.isCompleted.length;
+    } else {
+        updateBookCount();
+    }
+
     document.addEventListener(SAVED_EVENT, function() {
         console.log(localStorage.getItem(STORAGE_KEY));
     });
 })
 
+
+
+const modalButton = document.getElementById('modalButton');
+const getModal = document.getElementById('bookModal');
+const closeButton = document.getElementsByClassName('close')[0];
+
+modalButton.onclick = function(){
+    getModal.style.display = "block";
+}
+
+closeButton.onclick = function() {
+    getModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == getModal) {
+        getModal.style.display = "none";
+    }
+}
 
 const editSVG = `<svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512">
                       <path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/>
