@@ -66,12 +66,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
         const completedBookCount = books.filter(book => book.isCompleted).length;
         localStorage.setItem('completedBookCount', completedBookCount);
-    
+
+        const deletedCount = parseInt(localStorage.getItem('deletedBookCount') || 0);
+
         const unfinishedBooks = document.getElementById('unfinished-reading');
         const finishedBooks = document.getElementById('finished-reading');
+        const deletedBooks = document.getElementById('deletedBooks');
     
         unfinishedBooks.innerText = uncompletedBookCount;
         finishedBooks.innerText = completedBookCount;
+        deletedBooks.innerText = deletedCount; 
+    }
+
+    function deleteBookCount() {
+        const deletedCount = parseInt(localStorage.getItem('deletedBookCount') || 0);
+        localStorage.setItem('deletedBookCount', deletedCount + 1);
+        updateBookCount();
     }
 
     function addBookToCompleted(bookId) {
@@ -100,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(bookTarget === -1) return;
 
         books.splice(bookTarget, 1);
-        updateBookCount()
+        deleteBookCount();
         document.dispatchEvent(new Event(RENDER_EVENT));
         saveData();
     }
@@ -251,6 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(localStorage.getItem(STORAGE_KEY));
     });
 })
+
 
 
 
