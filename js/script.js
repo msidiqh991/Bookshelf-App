@@ -182,20 +182,23 @@ document.addEventListener('DOMContentLoaded', function() {
         writeTitle.setAttribute('id', 'book-title');
 
         const writeAuthor = document.createElement('span');
-        writeAuthor.innerText = bookObject.author;
+        writeAuthor.innerText = 'Author -> ' + bookObject.author;
         writeAuthor.classList.add('book-author');
 
         const writeYear = document.createElement('span');
-        writeYear.innerText = bookObject.year;
+        writeYear.innerText = 'Tahun -> ' + bookObject.year;
         writeYear.classList.add('book-year');
 
         const getBookStatus = document.createElement('span');
         getBookStatus.innerText = bookObject.isCompleted;
         getBookStatus.classList.add('book-status');
 
+        const writeCreationDate = document.createElement('span');
+        writeCreationDate.innerText = `Created on -> ${new Date().toLocaleDateString()}`;
+
         const getBookItem = document.createElement('div');
         getBookItem.classList.add('bookItem');
-        getBookItem.append(writeTitle, writeAuthor, writeYear, getBookStatus);
+        getBookItem.append(writeTitle, writeAuthor, writeYear, writeCreationDate);
     
         const container = document.createElement('div');
         container.classList.add('cardBox-item');
