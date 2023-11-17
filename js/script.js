@@ -24,13 +24,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const bookTitle = document.getElementById('title').value;
         const bookAuthor = document.getElementById('author').value;
         const bookYear = document.getElementById('year').value;
+        const isRead = document.getElementById('validateBook').checked;
 
         document.getElementById('title').value = '';
         document.getElementById('author').value = '';
         document.getElementById('year').value = '';
+        document.getElementById('validateBook').checked = false;
 
         const generatedID = generatedId();
-        const bookObject = generatedBookObject(generatedID, bookTitle, bookAuthor, bookYear, false);
+        const bookObject = generatedBookObject(generatedID, bookTitle, bookAuthor, bookYear, isRead);
         books.push(bookObject);
 
         updateBookCount();
