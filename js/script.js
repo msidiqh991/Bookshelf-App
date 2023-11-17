@@ -111,6 +111,19 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('deletedBookCount', deletedCount + 1);
         updateBookCount();
     }
+        
+    function toastMessage(){
+        const toastElement = document.createElement('div');
+        toastElement.id = 'toastMessage';
+        toastElement.innerText = 'Buku berhasil ditambahkan';
+        document.body.appendChild(toastElement);
+
+        const getToast = document.getElementById('toastMessage');
+        getToast.className = 'showToast';
+        setTimeout(() => {
+            getToast.className = getToast.className.replace('showToast', '');
+        }, 3000);
+    }
 
     function addBookToCompleted(bookId) {
         const bookTarget = findBook(bookId);
