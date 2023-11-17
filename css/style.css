@@ -326,6 +326,20 @@ nav {
   flex-direction: column;
 }
 
+.searchBar {
+  display: flex;
+  flex-direction: row;
+}
+
+.searchBar input[type=text] {
+  width: 100%;
+  font-style: italic;
+}
+
+.searchBar button {
+  margin-left: 10px;
+}
+
 .bookItem:hover h2, .bookItem:hover span {
   filter: blur(5px);
   transition: .5s;
