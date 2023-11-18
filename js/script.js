@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const generatedID = generatedId();
         const bookObject = generatedBookObject(generatedID, bookTitle, bookAuthor, bookYear, isRead);
         books.push(bookObject);
-
+    
         updateBookCount();
         document.dispatchEvent(new Event(RENDER_EVENT));
         toastMessage();
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 completedBookList.append(bookElement);
             }
         }
-    }    
+    } 
 
     function updateBookCount() {
         const uncompletedBookCount = books.filter(book => !book.isCompleted).length;
@@ -147,6 +147,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return null;
     }
 
+    function findBookIndex(bookId) {
+        for(const index in books) {
+            if(books[index].id === bookId) {
+                return index;
+            }
+        }
+        return -1;
+    }
+    
     function removeBookFromCompleted(bookId) {
         const bookTarget = findBookIndex(bookId);
 
@@ -156,15 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteBookCount();
         document.dispatchEvent(new Event(RENDER_EVENT));
         saveData();
-    }
-
-    function findBookIndex(bookId) {
-        for(const index in books) {
-            if(books[index].id === bookId) {
-                return index;
-            }
-        }
-        return -1;
     }
 
     function undoBookFromCompleted(bookId) {
@@ -190,10 +190,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const writeYear = document.createElement('span');
         writeYear.innerText = 'Tahun -> ' + bookObject.year;
         writeYear.classList.add('book-year');
-
-        const getBookStatus = document.createElement('span');
-        getBookStatus.innerText = bookObject.isCompleted;
-        getBookStatus.classList.add('book-status');
 
         const writeCreationDate = document.createElement('span');
         writeCreationDate.innerText = `Created on -> ${new Date().toLocaleDateString()}`;
@@ -241,6 +237,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 addBookToCompleted(bookObject.id);
             });
 
+            const editButton = document.createElement('button');
+            editButton.classList.add('editBtn');
+            editButton.innerHTML = editSVG;
+
+            editButton.addEventListener('click', function () {
+                editBook(bookObject.id);
+            });
+
             const removeButton = document.createElement('button');
             removeButton.classList.add('removeBtn');
             removeButton.innerHTML = deleteSVG;
@@ -253,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const setUnorderedList = document.createElement('ul');
             setUnorderedList.classList.add('social-media');
 
-            setListButton.append(checkButton, removeButton);
+            setListButton.append(checkButton, editButton, removeButton);
             setUnorderedList.append(setListButton);
             getBookItem.append(setUnorderedList)
             container.append(getBookItem);
