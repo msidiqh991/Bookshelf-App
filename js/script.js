@@ -237,14 +237,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 addBookToCompleted(bookObject.id);
             });
 
-            const editButton = document.createElement('button');
-            editButton.classList.add('editBtn');
-            editButton.innerHTML = editSVG;
-
-            editButton.addEventListener('click', function () {
-                editBook(bookObject.id);
-            });
-
             const removeButton = document.createElement('button');
             removeButton.classList.add('removeBtn');
             removeButton.innerHTML = deleteSVG;
@@ -257,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const setUnorderedList = document.createElement('ul');
             setUnorderedList.classList.add('social-media');
 
-            setListButton.append(checkButton, editButton, removeButton);
+            setListButton.append(checkButton, removeButton);
             setUnorderedList.append(setListButton);
             getBookItem.append(setUnorderedList)
             container.append(getBookItem);
