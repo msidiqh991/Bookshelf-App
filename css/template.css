@@ -142,8 +142,6 @@ input[type=text], input[type=number], .btn-submit:focus {
   position: fixed;
   z-index: 1;
   bottom: 30px;
-  background-color: var(--primary-color);
-  border-left: 8px solid var(--btn-hover-color);
   font-size: var(--normal-font-size);
   right: 10px;
 }
@@ -151,6 +149,16 @@ input[type=text], input[type=number], .btn-submit:focus {
 #toastMessage.showToast {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  background-color: var(--primary-color);
+  border-left: 8px solid var(--btn-hover-color);
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#toastMessage.showDeleteToast {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  background-color: darkred;
+  border-left: 8px solid red;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 

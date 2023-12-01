@@ -124,6 +124,22 @@ document.addEventListener('DOMContentLoaded', function() {
         getToast.className = 'showToast';
         setTimeout(() => {
             getToast.className = getToast.className.replace('showToast', '');
+            getToast.remove(); 
+        }, 3000);
+    }
+
+    function deleteToastMessage() {
+        const deleteToastElement = document.createElement('div');
+        deleteToastElement.id = 'toastMessage';
+        deleteToastElement.innerText = 'Buku telah dihapus!';
+        document.body.appendChild(deleteToastElement);
+    
+        const getToast = document.getElementById('toastMessage');
+        getToast.className = 'showDeleteToast';
+        
+        setTimeout(() => {
+            getToast.className = getToast.className.replace('showDeleteToast', '');
+            getToast.remove(); 
         }, 3000);
     }
 
@@ -164,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
         books.splice(bookTarget, 1);
         deleteBookCount();
         document.dispatchEvent(new Event(RENDER_EVENT));
+        deleteToastMessage()
         saveData();
     }
 
